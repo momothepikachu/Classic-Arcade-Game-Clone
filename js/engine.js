@@ -26,7 +26,7 @@ var Engine = (function(global) {
 
     canvas.width = 505;
     canvas.height = 606;
-    doc.body.appendChild(canvas);
+    doc.body.insertBefore(canvas, doc.body.childNodes[0]);
 
     /* This function serves as the kickoff point for the game loop itself
      * and handles properly calling the update and render methods.
@@ -91,7 +91,7 @@ var Engine = (function(global) {
      * render methods.
      */
     function updateEntities(dt) {
-        player.update();
+        
         allEnemies.forEach(function(enemy) {
             enemy.update(dt);
             if (enemy.x<player.x && (enemy.x+50.5)>player.x && enemy.y===player.y) {
@@ -100,7 +100,7 @@ var Engine = (function(global) {
                 player.x = 202.5;
             }
         });
-        
+        player.update();
 
     }
 
