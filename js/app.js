@@ -3,8 +3,9 @@
 // Create random speed and row for enemy
 var Random = function() {
     this.randomRow = Math.floor(Math.random()*3); //Enemy start from random row
-    this.randomSpeed = Math.floor((Math.random()+0.8)*3)*3; //Enemy runs at random speed
-    this.x = -101;
+    this.randomSpeed = Math.floor((Math.random()+0.5)*3)*6; //Enemy runs at random speed
+    this.randomDistance = Math.floor((Math.random()+1)*6); // Enemy starts from random starting point
+    this.x = -101*this.randomDistance;
     this.y = 63 + this.randomRow*83;    
 };
 
@@ -42,24 +43,25 @@ Enemy.prototype.checkCollisions = function() {
 
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
-var allEnemies = [];
+var allEnemies = [new Enemy(), new Enemy(), new Enemy(), new Enemy(), new Enemy(), new Enemy(), new Enemy(), new Enemy()];
 
-//Generate an array of enemies
-var generator = function() {
-    // allEnemies.push(new Enemy());
-    // setInterval(function() {
-    //     allEnemies.push(new Enemy());
-    // }, (Math.random()+0.2)*1000);
-    allEnemies.push(new Enemy());
-    let times = 0;
-    let interval = setTimeout(function() {
-        times += 1;
-        if (times === 100) {
-            clearInterval(interval);
-        }
-        allEnemies.push(new Enemy());
-        }, (Math.random())*300);
-};
+
+// //Generate an array of enemies
+// var generator = function() {
+//     // allEnemies.push(new Enemy());
+//     // setInterval(function() {
+//     //     allEnemies.push(new Enemy());
+//     // }, (Math.random()+0.2)*1000);
+//     allEnemies.push(new Enemy());
+//     let times = 0;
+//     let interval = setInterval(function() {
+//         times += 1;
+//         if (times === 5) {
+//             clearInterval(interval);
+//         }
+//         allEnemies.push(new Enemy());
+//         }, Math.random()*2000);
+// };
 
 //The player class
 var Player = function() {
