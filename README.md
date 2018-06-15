@@ -10,13 +10,13 @@ HTML5-Arcade-Game
  - Once a the player collides with an enemy, the game is reset and the player moves back to the start square. 
  - Once the player reaches the water the game is won.
 
-## Controls:
+## :computer: Controls:
  - Left Arrow: move left
  - Right Arrow: move right
  - Down Arrow: move down
  - Up Arrow: move up
 
-## Example
+## :sparkles: Example
 ![screenshot](images/arcadegame.gif)
 
 
