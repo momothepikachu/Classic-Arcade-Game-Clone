@@ -13,5 +13,5 @@ HTML5-Arcade-Game
  - Down Arrow: move down
  - Up Arrow: move up
 
-===============================
+
 ![screenshot](images/arcadegame.gif)
