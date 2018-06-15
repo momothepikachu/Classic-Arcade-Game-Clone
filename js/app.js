@@ -66,10 +66,6 @@ var Player = function() {
     this.you = 'images/char-boy.png';
     this.x = 505/2-50;
     this.y = 312;
-    this.up = 0;
-    this.down = 0;
-    this.left = 0;
-    this.right = 0;
 };
 
 //Update player on the screen
