@@ -1,7 +1,7 @@
 HTML5-Arcade-Game
 ===============================
 ## :rocket: Load the Game
- - simply load index.html in your favorite browser
+ - simply load index.html in your favorite browser!
  
 ## :video_game: How to Play 
  - make your player reach the water, without colliding into any one of the enemies(bugs)
