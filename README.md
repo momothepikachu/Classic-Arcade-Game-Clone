@@ -1,6 +1,6 @@
 HTML5-Arcade-Game
 ===============================
-## Install
+## :rocket:Load the Game
  - simply load index.html in your favorite browser
  
 ## :video_game: How to Play 
