@@ -1,10 +1,18 @@
+
+'use strict';
+// Create random speed and row for enemy
+var Random = function() {
+    this.randomRow = Math.floor(Math.random()*3); //Enemy start from random row
+    this.randomSpeed = Math.floor((Math.random()+0.8)*3)*3; //Enemy runs at random speed
+    this.x = -101;
+    this.y = 63 + this.randomRow*83;    
+};
+
 // Enemies our player must avoid
 var Enemy = function() {
-    this.randomRow = Math.floor(Math.random()*3);
-    this.randomSpeed = Math.floor((Math.random()+0.8)*3)*3;
+    Random.call(this);
     this.sprite = 'images/enemy-bug.png';
-    this.x = -101;
-    this.y = 63 + this.randomRow*83;
+
 };
 
 // Update the enemy's position, required method for game
@@ -18,21 +26,42 @@ Enemy.prototype.update = function(dt) {
 
 // Draw the enemy on the screen, required method for game
 Enemy.prototype.render = function() {
+    if (this.x>506) {
+        Random.call(this);
+    }
     ctx.drawImage(window.Resources.get(this.sprite), this.x, this.y);
+};
+
+// Detect collisions with the player
+Enemy.prototype.checkCollisions = function() {
+    if (this.x<player.x && (this.x+50.5)>player.x && this.y===player.y) {
+        alert('Oops, collision!');
+        window.Resources.restart();
+    }
 };
 
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
-var allEnemies = []
+var allEnemies = [];
+
+//Generate an array of enemies
 var generator = function() {
+    // allEnemies.push(new Enemy());
+    // setInterval(function() {
+    //     allEnemies.push(new Enemy());
+    // }, (Math.random()+0.2)*1000);
     allEnemies.push(new Enemy());
-    setInterval(function() {
+    let times = 0;
+    let interval = setTimeout(function() {
+        times += 1;
+        if (times === 100) {
+            clearInterval(interval);
+        }
         allEnemies.push(new Enemy());
-    }, (Math.random()+0.2)*1000)
-}
-// Now write your own player class
-// This class requires an update(), render() and
-// a handleInput() method.
+        }, (Math.random())*300);
+};
+
+//The player class
 var Player = function() {
     this.you = 'images/char-boy.png';
     this.x = 505/2-50;
@@ -43,44 +72,52 @@ var Player = function() {
     this.right = 0;
 };
 
-Player.prototype.update = function() {
-    if (this.y===-20) {
-        alert('You made it!!')
-        this.y = 312;
-        this.x = 202.5;
-    }
-    this.y += (this.down-this.up)*83;
-    this.x += (this.right-this.left)*101;
-    this.down=this.up=this.left=this.right= 0;
-};
+//Update player on the screen
+// Player.prototype.update = function() {
+//     if (this.y===-20) { //if player reach river, return to the starter position
+//         alert('You made it!!');
+//         window.Resources.restart();
+//     }
+//     this.y += (this.down-this.up)*83;
+//     this.x += (this.right-this.left)*101;
+//     this.down=this.up=this.left=this.right= 0;
+// };
 
+//Draw player on the screen
 Player.prototype.render = function() {
     ctx.drawImage(window.Resources.get(this.you), this.x, this.y);
-}
+};
 
+//Handle the keyboard input
 Player.prototype.handleInput = function(key) {
     switch(key) {
         case 'left':
-            if (this.x>0.5) {
-                this.left += 1;
+            if (this.x>0.5) { //stop player from moving out from the left side of screen
+                this.x -= 101;
             }
             break;
         case 'right':
-            if (this.x<404.5) {
-                this.right += 1;
+            if (this.x<404.5) { //stop player from moving out from the right side of screen
+                this.x += 101;
             }
             break;
         case 'up':
-            this.up += 1;
+            this.y -= 83;
+            if (this.y===-20) { //if player reach river, return to the starter position
+                setTimeout(function(){
+                    alert('You made it!!');
+                    window.Resources.restart();
+                }, 100);
+            }            
             break;
         case 'down':
-            if (this.y<312) {
-                this.down += 1;
+            if (this.y<312) { //player can't move out from the bottom of the screen
+                this.y += 83;
             }
             break;
     }
 
-}
+};
 
 // Place the player object in a variable called player
 var player = new Player();

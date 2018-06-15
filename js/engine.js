@@ -94,13 +94,9 @@ var Engine = (function(global) {
         
         allEnemies.forEach(function(enemy) {
             enemy.update(dt);
-            if (enemy.x<player.x && (enemy.x+50.5)>player.x && enemy.y===player.y) {
-                alert('Oops, collision!')
-                player.y = 312;
-                player.x = 202.5;
-            }
+            enemy.checkCollisions();
         });
-        player.update();
+        // player.update();
 
     }
 

@@ -102,10 +102,17 @@
     /* This object defines the publicly accessible functions available to
      * developers by creating a global Resources object.
      */
+
+    function restart() {
+        player.y = 312;
+        player.x = 202.5;
+    }
+
     window.Resources = {
         load: load,
         get: get,
         onReady: onReady,
-        isReady: isReady
+        isReady: isReady,
+        restart: restart
     };
 })();
